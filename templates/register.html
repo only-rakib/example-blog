@@ -53,7 +53,17 @@
                             data-validation-required-message="Please confirm your password." name="pass2">
                     </div>
                 </div>
-                <div id="success"></div>
+                {% if x.mgs == 'success' %}
+                <div id="success" class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    <strong>Registration Success</strong>
+                </div>
+                {% elif x.mgs == 'failed' %}
+                <div id="success" class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    <strong>{{x.error}}</strong>
+                </div>
+                {% endif %}
                 <!-- For success/fail messages -->
                 <button type="submit" class="btn btn-primary" id="login-btn">Register</button>
             </form>
@@ -70,28 +80,35 @@
     $('#contactForm').on('submit', function (event) {
         event.preventDefault();
         //console.log("form submitted!")  // sanity check
-        the_post = [{
+        the_post = {
             'first_name': $('#first_name').val(),
             'last_name': $('#last_name').val(),
             'email': $('#email').val(),
-            'pass': $('#confirm-password').val(),
-        }];
-        console.log("asadasd",the_post);
+            'pass2': $('#confirm-password').val(),
+        };
+        
         create_post();
     });
     function create_post() {
-        console.log("create post is working!") // sanity check
+        console.log("create post is working!");
+        console.log("asadasd",the_post); // sanity check
         $.ajax({
+            
             url: "{% url 'register'%}", // the endpoint
             type: "POST", // http method
-
-            data: {'val':the_post}, // data sent with the post request
+            dataType: 'json',
+            data: {
+                'val':JSON.stringify(the_post),
+                }, // data sent with the post request
 
             // handle a successful response
-            success: function (json) {
+            success: function(response) {
                 $('#contactForm').find("input[type=text], textarea,input[type=password],input[type=email]").val("");
-                //window.location.replace("{% url 'post' %}");
-
+                
+                $('#success').removeClass('alert-danger')
+                $('#success').addClass('alert-success')
+                $('#mgs').text("Success")
+                //window.location.replace("{% url 'posts:post_home' %}");
                 console.log("success"); // another sanity check
             },
 

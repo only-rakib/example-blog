@@ -14,18 +14,23 @@
     <!-- Content Row -->
     <div class="row">
       <div class="col-lg-4 mb-4">
-        <form name="sentMessage" id="contactForm" novalidate>
+        
+        {% for message in messages %}
+					<p id="messages">{{message}}</p>
+				{% endfor %}	
+        <form method="POST" name="sentMessage" id="contactForm" validate>
+          {% csrf_token %}
           <div class="control-group form-group">
             <div class="controls">
               <label>Email*</label>
-              <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email.">
+              <input type="email" class="form-control" name="email" id="email" required data-validation-required-message="Please enter your email.">
               <p class="help-block"></p>
             </div>
           </div>
           <div class="control-group form-group">
             <div class="controls">
               <label>Password*</label>
-              <input type="password" class="form-control" id="password" required data-validation-required-message="Please enter your password.">
+              <input type="password" class="form-control" name="password" id="password" required data-validation-required-message="Please enter your password.">
             </div>
           </div>
           <div id="success"></div>

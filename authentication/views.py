@@ -6,16 +6,41 @@ from django.views.decorators.csrf import csrf_exempt
 from json import loads as jsonloads
 from django.http import HttpResponseRedirect
 from . models import User
+from django.contrib.auth import authenticate, login as auth_login, logout
 # LOGIN VIEW ENDPOINT
 
 
-def login(response):
+@csrf_exempt
+def login(request):
+    if request.user.is_authenticated:
+        return redirect("posts:post_home")
+    else:
+        if request.method == 'POST':
+            y = {'mgs': 'failed',
+                 'error': 'ex',
+                 }
+            email = request.POST['email']
+            password = request.POST['password']
 
-    return render(response, 'login.html')
+            user = authenticate(request, email=email, password=password)
+            if user is not None:
+                auth_login(request, user)
+                return redirect("posts:post_home")
+            else:
+                messages.info(request, 'Username OR password is incorrect')
+        context = {}
+        return render(request, 'login.html', context)
+    # return render(request, 'login.html')
+
+
+def log_out(request):
+    logout(request)
+    return redirect("posts:post_home")
 
 
 @csrf_exempt
 def register(request):
+
     if request.method == 'POST':
 
         try:
@@ -33,15 +58,15 @@ def register(request):
             user = User.objects.create_user(
                 first_name=first_name, last_name=last_name, password=password, email=email)
             user.save()
-            y={'mgs':'success'}
-            return render(request, 'register.html',{'x':y})
-            #return redirect("posts:post_home",{'x':y})
+            y = {'mgs': 'success'}
+            return render(request, 'register.html', {'x': y})
+            # return redirect("posts:post_home",{'x':y})
             # return JsonResponse({}, status=200)
         except Exception as ex:
-            y={'mgs':'failed',
-                'error':ex,
-            }
-            
-            return render(request, 'register.html',{'x':y})
-            #return redirect("posts:post_home",{'x':y})
+            y = {'mgs': 'failed',
+                 'error': ex,
+                 }
+
+            return render(request, 'register.html', {'x': y})
+            # return redirect("posts:post_home",{'x':y})
     return render(request, 'register.html')

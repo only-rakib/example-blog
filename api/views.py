@@ -29,16 +29,19 @@ class LoginView(GenericAPIView):
         email = data.get('email', '')
         password = data.get('password', '')
         user = authenticate(email=email, password=password)
-
+        
         if user:
-            auth_token = jwt.encode(
-                {'email': user.email}, settings.JWT_SECRET_KEY)
+
+            #auth_token = jwt.encode(
+                #{'email': user.email}, settings.JWT_SECRET_KEY)
 
             serializer = UserSerializer(user)
 
-            data = {'user': serializer.data, 'token': auth_token}
+            data = {'user': serializer.data}
 
             return Response(data, status=status.HTTP_200_OK)
 
             # SEND RES
         return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        #return Response('data', status=status.HTTP_200_OK)

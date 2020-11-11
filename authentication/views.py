@@ -7,7 +7,7 @@ from json import loads as jsonloads
 from django.http import HttpResponseRedirect
 from . models import User
 from django.contrib.auth import authenticate, login as auth_login, logout
-
+from django.contrib import messages
 # LOGIN VIEW ENDPOINT
 
 

@@ -7,6 +7,7 @@ from json import loads as jsonloads
 from django.http import HttpResponseRedirect
 from . models import User
 from django.contrib.auth import authenticate, login as auth_login, logout
+
 # LOGIN VIEW ENDPOINT
 
 
@@ -35,7 +36,8 @@ def login(request):
 
 def log_out(request):
     logout(request)
-    return redirect("posts:post_home")
+    #return redirect("posts:post_home")
+    return redirect("/")
 
 
 @csrf_exempt

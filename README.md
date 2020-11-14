@@ -2,9 +2,12 @@
 
 ## Deploy to Heroku
 
-You can deploy this app yourself to Heroku to play with.
+Here is the Heroku link with Phase1,Phase2 and Bonus 1:
+->Login and Regiter View with Django Rest Framework
+	*Using Serializer
+	*Using JWT login 
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://exampleblogforgrayit.herokuapp.com/)
 
 ## Running
 

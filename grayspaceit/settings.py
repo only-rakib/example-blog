@@ -50,12 +50,12 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-       
+
     ],
-'DEFAULT_PARSER_CLASSES': (
+    'DEFAULT_PARSER_CLASSES': (
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser'
-     )
+    )
 }
 
 MIDDLEWARE = [
@@ -67,7 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'grayspaceit.urls'
@@ -75,8 +75,7 @@ ROOT_URLCONF = 'grayspaceit.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -98,7 +97,12 @@ WSGI_APPLICATION = 'grayspaceit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'ciba',
+        'HOST':'ec2-54-158-190-214.compute-1.amazonaws.com',
+        'NAME':'d8mjsqnv1p1q5b',
+        'USER':'twalshzcltdysb',
+        'PORT':'5432',
+        'PASSWORD':'05e3590724d8f6beab0795397893eaf5c7901efc46957a28ae3c98784d60ebc5',
+        'URI':'postgres://twalshzcltdysb:05e3590724d8f6beab0795397893eaf5c7901efc46957a28ae3c98784d60ebc5@ec2-54-158-190-214.compute-1.amazonaws.com:5432/d8mjsqnv1p1q5b',
     }
 }
 
@@ -134,7 +138,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 
 # Static files (CSS, JavaScript, Images)

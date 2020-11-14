@@ -1,4 +1,4 @@
-# Blog Django Example App
+# Blog Django Example App with Bonus 1
 
 ## Deploy to Heroku
 

@@ -3,10 +3,11 @@
 ## Deploy to Heroku
 
 Here is the Heroku link with Phase1,Phase2 and Bonus 1:
+```
 ->Login and Regiter View with Django Rest Framework
 	*Using Serializer
 	*Using JWT login 
-
+```
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://exampleblogforgrayit.herokuapp.com/)
 
 ## Running
